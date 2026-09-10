@@ -10,7 +10,7 @@ from src.models.time_tracker.time_tracker import TimeTracker
 import database
 
 class Calendar:
-    def add_calendar_event(event):
+    def add_calendar_event(event: CalendarEvent):
         conn = database.calendar_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -29,6 +29,33 @@ class Calendar:
         conn.commit()
         cursor.close()
         conn.close()
+
+    def get_calendar_event(target_date):
+        conn = database.calendar_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT * FROM calendar WHERE date = ?
+        """, (
+            target_date,
+        ))
+        result = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return result
+
+    def delete_calendar_event(target_id):
+        conn = database.calendar_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            DELETE FROM calendar WHERE id = ?
+        """, (
+            target_id,
+        ))
+        deleted_row_count = cursor.rowcount
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return deleted_row_count
 
 
 

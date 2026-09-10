@@ -11,6 +11,4 @@ from src.services.calendar.calendar import Calendar
 import database
 
 database.calendar_init()
-event1 = CalendarEvent("2024-06-01", "Meeting with Team", "Discuss project updates", "scheduled")
-Calendar.add_calendar_event(event1)
-
+database.time_tracker_init()

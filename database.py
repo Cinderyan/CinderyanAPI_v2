@@ -27,3 +27,21 @@ def calendar_init():
     cursor.close()
     conn.close()
 
+def time_tracker_connection():
+    conn = sqlite3.connect("data/time_tracker_data.db")
+    return conn
+
+def time_tracker_init():
+    conn = time_tracker_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS time_tracker(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT NOT NULL,
+            working_hours TEXT NOT NULL,
+            study_hours TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+    cursor.close()
+    conn.close()
