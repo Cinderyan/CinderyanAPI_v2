@@ -6,6 +6,7 @@
 #
 
 class TimeTracker:
-    def __init__(self, working_hours, study_hours):
+    def __init__(self, date, working_hours, study_hours):
+        self.date = date
         self.working_hours = working_hours
         self.study_hours = study_hours

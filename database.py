@@ -37,9 +37,9 @@ def time_tracker_init():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS time_tracker(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            date TEXT NOT NULL,
-            working_hours TEXT NOT NULL,
-            study_hours TEXT NOT NULL
+            date TEXT NOT NULL UNIQUE,
+            working_hours REAL NOT NULL DEFAULT 0,
+            study_hours REAL NOT NULL DEFAULT 0
         )
     """)
     conn.commit()

@@ -6,10 +6,9 @@
 #
 
 from src.models.calendar_event.calendar_event import CalendarEvent
-from src.models.time_tracker.time_tracker import TimeTracker
 import database
 
-class Calendar:
+class CalendarService:
     def add_calendar_event(event: CalendarEvent):
         conn = database.calendar_connection()
         cursor = conn.cursor()
@@ -56,6 +55,19 @@ class Calendar:
         cursor.close()
         conn.close()
         return deleted_row_count
-
-
+    
+    def update_calendar_event(new_status, target_id):
+        conn = database.calendar_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE calendar SET status = ? WHERE id = ?
+        """, (
+            new_status,
+            target_id
+        ))
+        updated_row_count = cursor.rowcount
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return updated_row_count
 
