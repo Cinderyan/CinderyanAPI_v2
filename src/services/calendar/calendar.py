@@ -7,9 +7,28 @@
 
 from src.models.calendar_event.calendar_event import CalendarEvent
 from src.models.time_tracker.time_tracker import TimeTracker
-from datetime import date
-import sqlite3
+import database
 
-calendar_db_path = "data/calendar_data.db"
-calendar = sqlite3.connect(calendar_db_path)
-calendar.close()
+class Calendar:
+    def add_calendar_event(event):
+        conn = database.calendar_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO calendar(
+                date, 
+                title, 
+                description, 
+                status)
+            VALUES(?, ?, ?, ?)
+        """, (
+            event.date, 
+            event.title, 
+            event.description, 
+            event.status
+        ))
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+
+

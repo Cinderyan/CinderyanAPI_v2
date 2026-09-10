@@ -7,6 +7,10 @@
 
 from src.models.calendar_event.calendar_event import CalendarEvent
 from src.models.time_tracker.time_tracker import TimeTracker
-import src.services.calendar.calendar
-import sqlite3
-from datetime import date
+from src.services.calendar.calendar import Calendar
+import database
+
+database.calendar_init()
+event1 = CalendarEvent("2024-06-01", "Meeting with Team", "Discuss project updates", "scheduled")
+Calendar.add_calendar_event(event1)
+

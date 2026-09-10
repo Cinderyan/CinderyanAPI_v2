@@ -10,6 +10,6 @@ class CalendarEvent:
         self.date = date
         self.title = title
         self.description = description
-        self.status = "scheduled"
+        self.status = status
 
     
