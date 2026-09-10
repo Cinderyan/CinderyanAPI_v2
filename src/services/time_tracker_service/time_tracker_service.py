@@ -28,7 +28,7 @@ class TimeTrackerService:
         cursor.close()
         conn.close()
 
-        def get_time_tracker_entry(target_date):
+    def get_time_tracker_entry(target_date):
             conn = database.time_tracker_connection()
             cursor = conn.cursor()
             cursor.execute("""
@@ -41,7 +41,7 @@ class TimeTrackerService:
             conn.close()
             return result
 
-        def delete_time_tracker_entry(target_id):
+    def delete_time_tracker_entry(target_id):
             conn = database.time_tracker_connection()
             cursor = conn.cursor()
             cursor.execute("""
@@ -55,7 +55,7 @@ class TimeTrackerService:
             conn.close()
             return deleted_row_count
 
-        def update_time_tracker_entry(new_working_hours, new_study_hours, target_id):
+    def update_time_tracker_entry(new_working_hours, new_study_hours, target_id):
             conn = database.time_tracker_connection()
             cursor = conn.cursor()
             cursor.execute("""
