@@ -54,7 +54,7 @@ def deadline_init():
     conn = deadline_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        CREATE TABLE IF NOT EXIST deadline(
+        CREATE TABLE IF NOT EXISTS deadline(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             date TEXT NOT NULL,
             title TEXT NOT NULL,
