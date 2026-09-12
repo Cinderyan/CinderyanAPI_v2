@@ -1,52 +1,53 @@
 #歐睿安版權所有
 #CinderyanAPT
-#calender_service
+#deadline_service
 #
 #
 #
 
-from src.models.calendar_event.calendar_event import CalendarEvent
+from src.models.deadline.deadline import Deadline
 import database
 
-class CalendarService:
-    def add_calendar_event(event: CalendarEvent):
-        conn = database.calendar_connection()
+class DeadlineService:
+    def add_deadline(deadline: Deadline):
+        conn = database.deadline_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO calendar(
-                date, 
-                title, 
-                description, 
-                status)
-            VALUES(?, ?, ?, ?)
+            INSERT INTO deadline(
+                date,
+                title,
+                description,
+                status
+            )
+            VALUES(?, ?, ?, ?),
         """, (
-            event.date, 
-            event.title, 
-            event.description, 
-            event.status
+            deadline.date,
+            deadline.title,
+            deadline.description,
+            deadline.status
         ))
         conn.commit()
         cursor.close()
         conn.close()
 
-    def get_calendar_event(target_date):
-        conn = database.calendar_connection()
+    def get_deadline(target_date):
+        conn = database.deadline_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            SELECT * FROM calendar WHERE date = ?
+            SELECT * FROM deadline WHERE date = ?
         """, (
             target_date,
-        ))
+        )) 
         result = cursor.fetchall()
         cursor.close()
         conn.close()
         return result
-
-    def delete_calendar_event(target_id):
-        conn = database.calendar_connection()
+    
+    def delete_deadline(target_id):
+        conn = database.deadline_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            DELETE FROM calendar WHERE id = ?
+            DELETE FROM deadline WHERE id = ?
         """, (
             target_id,
         ))
@@ -55,12 +56,12 @@ class CalendarService:
         cursor.close()
         conn.close()
         return deleted_row_count
-    
-    def update_calendar_event(new_status, target_id):
-        conn = database.calendar_connection()
+
+    def update_deadlinne(new_status, target_id):
+        conn = database.deadline_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            UPDATE calendar SET status = ? WHERE id = ?
+            UPDATE deadline SET status = ? WHERE id = ?
         """, (
             new_status,
             target_id
@@ -70,4 +71,3 @@ class CalendarService:
         cursor.close()
         conn.close()
         return updated_row_count
-

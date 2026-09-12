@@ -2,3 +2,4 @@
 __pycache__
 calendar_data.db
 time_tracker_data.db
+deadline_data.db

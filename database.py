@@ -45,3 +45,23 @@ def time_tracker_init():
     conn.commit()
     cursor.close()
     conn.close()
+
+def deadline_connection():
+    conn = sqlite3.connect("data/deadline_data.db")
+    return conn
+
+def deadline_init():
+    conn = deadline_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXIST deadline(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT NOT NULL,
+            title TEXT NOT NULL,
+            description TEXT,
+            ststus TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+    cursor.close()
+    conn.close()
