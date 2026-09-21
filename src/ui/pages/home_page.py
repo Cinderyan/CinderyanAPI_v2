@@ -9,13 +9,31 @@ from src.ui.components.calendar_section import create_calendar_section
 from src.ui.components.time_tracker_section import create_time_tracker_section
 from src.ui.components.deadline_section import create_deadline_section
 
-
+from datetime import date
 import flet as ft
 
 def create_home_page(show_calendar):
-    title = ft.Text(
-        "睿安，您好",
-        size = 30
+    today = date.today()
+    weekdays = [
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六",
+        "星期日"
+    ]
+    title = ft.Column(
+        controls = [
+            ft.Text(
+                "睿安 , 您好",
+                size = 30
+            ),
+            ft.Text(
+                f"今天是 {today.month} 月 {today.day} 日 , {weekdays[today.weekday()]}",
+                size = 18
+            )
+        ]
     )
     view_calendar_button = ft.Button(
         content = ft.Text("檢視月曆"),
